@@ -41,7 +41,7 @@ public class PostServiceImpl implements PostService {
         );
 
         PostDto dto = new PostDto();
-        dto.setId(post.getId());
+        dto.setId(post.getPost_id());
         dto.setTitle(post.getTitle());
         dto.setDescription(post.getDescription());
         dto.setContent(post.getContent());
@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
 
     PostDto mapToDto(Post post){
         PostDto dto = new PostDto();
-        dto.setId(post.getId());
+        dto.setId(post.getPost_id());
         dto.setTitle(post.getTitle());
         dto.setDescription(post.getDescription());
         dto.setContent(post.getContent());
