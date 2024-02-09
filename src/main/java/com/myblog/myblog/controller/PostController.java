@@ -4,7 +4,7 @@ import com.myblog.myblog.entity.Post;
 import com.myblog.myblog.payload.PostDto;
 import com.myblog.myblog.service.PostService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+//import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
