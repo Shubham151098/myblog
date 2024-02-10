@@ -1,7 +1,9 @@
 package com.myblog.myblog.controller;
 
+import com.myblog.myblog.entity.Role;
 import com.myblog.myblog.entity.User;
 import com.myblog.myblog.payload.SignUpDto;
+import com.myblog.myblog.repository.RoleRepository;
 import com.myblog.myblog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -21,6 +27,9 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     //http://localhost:8080/api/auth/signup
@@ -40,6 +49,14 @@ public class AuthController {
         user.setUsername(signUpDto.getUsername());
         user.setEmail(signUpDto.getEmail());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
+        Role roles = roleRepository.findByName(signUpDto.getRoleType()).get();
+
+        //This will set the role during the registration of user
+//        Set<Role> convertRoleToSet = new HashSet<>();
+//        convertRoleToSet.add(roles);
+//        user.setRoles(convertRoleToSet);
+        user.setRoles(Collections.singleton(roles));
+
 
         userRepository.save(user);
 
