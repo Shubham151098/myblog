@@ -6,6 +6,7 @@ import com.myblog.myblog.service.PostService;
 import org.springframework.http.HttpStatus;
 //import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class PostController {
     }
 
     //http://localhost:8080/api/posts/particular?id=1
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/particular")
     public ResponseEntity<PostDto> getPostById(@RequestParam long id){
         PostDto dto = postService.getPostById(id);
